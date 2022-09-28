@@ -1,0 +1,34 @@
+node{
+    def mavenHome = tool name: 'maven3.8.6'
+  stage('codePullGithub') {
+    sh "echo start of project"
+    sh "echo This is a java project for boa"
+    git 'https://github.com/KenOps533/Acura-webapp'
+  }
+  stage('Test+Build') {
+    sh "${mavenHome}/bin/mvn clean package"
+    //sh "echo building with maven"
+    //sh "mvn validate" 
+    //sh "mvn compile" 
+    //sh "mvn test"
+   // sh "mvn clean package"
+  }
+  stage('CodeQualityReport') {
+    sh "echo Running Code Quality Report analysis"
+    //sh "mvn sonar:sonar"
+    sh "${mavenHome}/bin/mvn clean sonar:sonar"
+  }
+  stage('UploadArtifacts') {
+    sh "echo uploading artifacts in nexus"
+    sh "${mavenHome}/bin/mvn deploy"
+  }
+  stage('Development') {
+    sh "echo app now ready for deployment"
+   // sh "scp app.war ec2-user@13.57.212.115:/opt/tomcat9/webapps/"
+    deploy adapters: [tomcat9(credentialsId: 'Tomcat-user', path: '', url: 'http://34.227.15.90:8080/')], contextPath: null, war: 'target/*war'
+      }
+  stage('Notification') {
+  //  sh  "mail" 
+    sh "echo slackchannel"
+  }
+}
