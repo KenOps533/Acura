@@ -96,13 +96,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Releases Nexus Repository</name>
-	      <url>http://54.237.148.20:8081/repository/acura-webapp-fe-releases/</url> 
+	      <url>http://54.163.174.225:8081/repository/acura-webapp-fe-releases/</url> 
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Snapshot Nexus Repository </name>
-	      <url>http://54.237.148.20:8081/repository/acura-webapp-snapshots/</url>
+	      <url>http://54.163.174.225:8081/repository/acura-webapp-snapshots/</url>
 	    </snapshotRepository>
 	</distributionManagement>
 	
